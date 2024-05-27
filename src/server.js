@@ -19,10 +19,6 @@ export const setupServer = async () => {
     }),
   );
 
-  app.use('*', (req, res) => {
-    res.status(404).json({ message: 'Not found' });
-  });
-
   dotenv.config();
   const PORT = Number(env('PORT', '3000'));
 
@@ -48,6 +44,10 @@ export const setupServer = async () => {
       message: `Successfully found contact with id ${contactId}!`,
       data: contact,
     });
+  });
+
+  app.use('*', (req, res) => {
+    res.status(404).json({ message: 'Not found' });
   });
 
   app.listen(PORT, () => {
