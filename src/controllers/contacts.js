@@ -1,4 +1,8 @@
-import { getAllContacts, getContactById } from '../services/contacts.js';
+import {
+  createContact,
+  getAllContacts,
+  getContactById,
+} from '../services/contacts.js';
 import mongoose from 'mongoose';
 import createHttpError from 'http-errors';
 
@@ -11,7 +15,7 @@ export const getContactsController = async (req, res, next) => {
   });
 };
 
-export const getContactByIdController = async (req, res, next) => {
+export const getContactByIdController = async (req, res) => {
   const { contactId } = req.params;
   if (!mongoose.Types.ObjectId.isValid(contactId)) {
     return res.status(404).json({
@@ -39,4 +43,15 @@ export const getContactByIdController = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+export const createContactController = async (req, res, next) => {
+  const { body } = req;
+  const contact = await createContact(body);
+
+  res.status(201).json({
+    status: 201,
+    message: 'Successfully created a contact!',
+    data: contact,
+  });
 };
