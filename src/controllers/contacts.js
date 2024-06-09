@@ -8,12 +8,19 @@ import {
 import mongoose from 'mongoose';
 import createHttpError from 'http-errors';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
+import { parseSortParams } from '../utils/parseSortParams.js';
+import { parseFilterParams } from '../utils/parseFilterParams.js';
 
 export const getContactsController = async (req, res, next) => {
   const { page, perPage } = parsePaginationParams(req.query);
+  const { sortOrder, sortBy } = parseSortParams(req.query);
+  const filter = parseFilterParams(req.query);
   const contacts = await getAllContacts({
     page,
     perPage,
+    sortOrder,
+    sortBy,
+    filter,
   });
   res.status(200).json({
     status: 200,
@@ -35,10 +42,6 @@ export const getContactByIdController = async (req, res) => {
     const contact = await getContactById(contactId);
 
     if (!contact) {
-      //   return res.status(404).json({
-      //     status: 404,
-      //     message: `Contact with id ${contactId} not found`,
-      //   });
       next(createHttpError(404, 'Contact not found'));
       return;
     }
