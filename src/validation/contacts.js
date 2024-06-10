@@ -7,6 +7,7 @@ export const createContactSchema = Joi.object({
     'string.max': 'Username should have at most {#limit} characters',
     'any.required': '{#label} is required',
   }),
+
   phoneNumber: Joi.string().required(),
   email: Joi.string().email(),
   isFavourite: Joi.boolean(),
