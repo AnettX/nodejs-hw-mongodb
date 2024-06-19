@@ -55,7 +55,7 @@ const createSession = () => {
 };
 
 export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
-  const session = await User.findOne({
+  const session = await Session.findOne({
     _id: sessionId,
     refreshToken,
   });
@@ -70,9 +70,9 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
 
   const newSession = createSession();
 
-  await User.deleteOne({
+  await Session.deleteOne({
     _id: sessionId,
     refreshToken,
   });
-  return await User.create({ userId: session.userId, ...newSession });
+  return await Session.create({ userId: session.userId, ...newSession });
 };

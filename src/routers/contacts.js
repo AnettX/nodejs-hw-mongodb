@@ -15,11 +15,12 @@ import {
 import { authenticate } from '../middlewares/authenticate.js';
 
 const router = Router();
+router.use('/', authenticate);
 
 router.get('/', ctrlWrapper(getContactsController));
 router.get('/:contactId', ctrlWrapper(getContactByIdController));
 router.post(
-  '',
+  '/',
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
 );
@@ -29,6 +30,5 @@ router.patch(
   ctrlWrapper(patchContactController),
 );
 router.delete('/:contactId', ctrlWrapper(deleteContactController));
-router.use(authenticate);
 
 export default router;
