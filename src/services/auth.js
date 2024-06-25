@@ -3,10 +3,18 @@ import { User } from '../db/models/user.js';
 import bcrypt from 'bcrypt';
 import { randomBytes } from 'crypto';
 import { Session } from '../db/models/session.js';
-import { ENV_VARS, FIFTEEN_MINUTES, ONE_DAY } from '../constants/index.js';
+import {
+  ENV_VARS,
+  FIFTEEN_MINUTES,
+  ONE_DAY,
+  TEMPLATES_DIR,
+} from '../constants/index.js';
 import jwt from 'jsonwebtoken';
 import { env } from '../utils/env.js';
 import { sendEmail } from '../utils/sendEmail.js';
+import Handlebars from 'handlebars';
+import path from 'node:path';
+import fs from 'node:fs/promises';
 
 export const registerUser = async (payload) => {
   const user = await User.findOne({ email: payload.email });
@@ -94,14 +102,27 @@ export const requestResetToken = async (email) => {
     },
   );
 
+  const resetPasswordTemplatesPath = path.join(
+    TEMPLATES_DIR,
+    'reset-password-email.html',
+  );
+
+  const templateSource = (
+    await fs.readFile(resetPasswordTemplatesPath)
+  ).toString();
+
+  const template = Handlebars.compile(templateSource);
+  const html = template({
+    name: user.name,
+    link: `${env(ENV_VARS.APP_DOMAIN)}/reset-password?token=${resetToken}`,
+  });
+
   try {
     await sendEmail({
       from: env(ENV_VARS.SMTP_FROM),
       to: email,
       subject: 'Reset your password',
-      html: `<p>Click <a href="${env(
-        ENV_VARS.APP_DOMAIN,
-      )}/reset-password?token=${resetToken}">here</a> to reset your password</p>`,
+      html,
     });
   } catch (error) {
     console.log(error);
@@ -110,4 +131,28 @@ export const requestResetToken = async (email) => {
       'Failed to send the email, please try again later.',
     );
   }
+};
+
+export const resetPassword = async (payload) => {
+  let entries;
+
+  try {
+    entries = jwt.verify(payload.token, env('JWT_SECRET'));
+  } catch (error) {
+    if (error instanceof Error)
+      throw createHttpError(401, 'Token is expired or invalid.');
+    throw error;
+  }
+
+  const user = await User.findOne({
+    email: entries.email,
+    _id: entries.sub,
+  });
+
+  if (!user) {
+    throw createHttpError(404, 'User not found!');
+  }
+
+  const encryptedPassword = await bcrypt.hash(payload.password, 10);
+  await User.updateOne({ _id: user._id }, { password: encryptedPassword });
 };
