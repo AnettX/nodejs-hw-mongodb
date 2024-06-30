@@ -58,17 +58,15 @@ export const createContact = async (payload, userId, photo) => {
 
 export const patchContact = async (
   contactId,
-  payload,
-  options = {},
+  { photo, ...payload },
   userId,
+  options = {},
 ) => {
   const rawResult = await ContactsCollection.findOneAndUpdate(
-    {
-      _id: contactId,
-    },
-    payload,
+    { _id: contactId, userId },
+    { ...payload, photo },
     { new: true, includeResultMetadata: true, ...options },
-  ).where({ userId: userId });
+  ).where({ userId });
 
   if (!rawResult || !rawResult.value) return null;
   return {
