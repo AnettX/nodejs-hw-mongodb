@@ -13,7 +13,7 @@ parameters:
       type: string
       example: '667dae3a687a20f9da4c3e5a'
 responses:
-  '200':
+  '204':
     description: 'Delete contact'
     content:
       application/json:
@@ -26,12 +26,14 @@ responses:
           properties:
             status:
               type: integer
-              example: 200
+              example: 204
             message:
               type: string
-              example: Successfully delete contact with id 667dae3a687a20f9da4c3e5a!
+              example: Successfully deleted contact with id 667dae3a687a20f9da4c3e5a!
             data:
               type: object
               $ref: '../../../components/schemas/contact.yaml'
   '401':
     $ref: '../../../components/responses/401.yaml'
+  '404':
+    $ref: '../../../components/responses/404.yaml'

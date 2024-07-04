@@ -2,7 +2,7 @@ tags:
   - Contacts
 summary: Change contact
 operationId: patchContact
-description: 'Patch contact by id'
+description: 'Update contact'
 security:
   - bearerAuth: []
 parameters:
@@ -14,7 +14,7 @@ parameters:
       example: '667dae3a687a20f9da4c3e5a'
 responses:
   '200':
-    description: 'Patch contact by id'
+    description: 'Update contact'
     content:
       application/json:
         schema:
@@ -35,3 +35,5 @@ responses:
               $ref: '../../../components/schemas/contact.yaml'
   '401':
     $ref: '../../../components/responses/401.yaml'
+  '404':
+    $ref: '../../../components/responses/404.yaml'
