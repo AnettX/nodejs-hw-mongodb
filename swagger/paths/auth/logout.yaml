@@ -6,8 +6,8 @@ description: 'Logout user'
 security:
   - bearerAuth: []
 responses:
-  '200':
-    description: The user is logged out.
+  '204':
+    description: No content. The user is logged out.
   '401':
     description: 'Session not found or Session token expired'
   '404':

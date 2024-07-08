@@ -1,24 +1,19 @@
 tags:
   - Auth
-summary: Login user
-operationId: loginUser
-description: 'Login user'
-security:
-  - bearerAuth: []
-requestBody:
-  required: true
-  content:
-    application/json:
-      schema:
-        type: object
-        properties:
-          email:
-            example: 'ann@maybe.com'
-          password:
-            example: 'ann1111'
+summary: Refresh a user session
+operationId: refreshUserSession
+description: 'Refresh user session'
+security: []
+parameters:
+  - in: cookie
+    name: refreshToken
+    required: true
+    schema:
+      type: string
+      description: refresh token
 responses:
   '200':
-    description: User is logged in.
+    description: Successfully refreshed a session!
     content:
       application/json:
         schema:
@@ -33,13 +28,13 @@ responses:
               example: 200
             message:
               type: string
-              example: Successfully logged user in!
+              example: Successfully refreshed a session!
             data:
               type: object
               properties:
                 accessToken:
                   type: string
-                  example: 3rByLHUNOJjB6gL6FBDCud/iiGGG2WNSuldqFJaL
+                  example: CaAgGZHREfYYXVmbrhiTMBzv6UCOEmG4Uykkqnn+
   '401':
     description: 'Unauthorized'
   '404':
