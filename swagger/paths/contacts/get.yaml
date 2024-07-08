@@ -6,13 +6,6 @@ description: 'Get list of users with this endpoint'
 security:
   - bearerAuth: []
 parameters:
-  - in: header
-    name: Authorization
-    required: true
-    schema:
-      type: string
-      description: 'The token issued to the current user.'
-      example: 'Authorization - the token issued to the current user'
   - in: query
     name: page
     schema:

@@ -43,16 +43,6 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The token issued to the current user.",
-              "example": "Authorization - the token issued to the current user"
-            }
-          },
-          {
             "in": "query",
             "name": "page",
             "schema": {
@@ -181,6 +171,7 @@
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "multipart/form-data": {
               "schema": {
@@ -217,6 +208,7 @@
                   },
                   "photo": {
                     "type": "string",
+                    "format": "binary",
                     "example": "https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg"
                   }
                 }
@@ -288,16 +280,6 @@
               "type": "string",
               "example": "667dae3a687a20f9da4c3e5a"
             }
-          },
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The token issued to the current user.",
-              "example": "Authorization - the token issued to the current user"
-            }
           }
         ],
         "responses": {
@@ -359,16 +341,6 @@
               "type": "string",
               "example": "667dae3a687a20f9da4c3e5a"
             }
-          },
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The token issued to the current user.",
-              "example": "Authorization - the token issued to the current user"
-            }
           }
         ],
         "requestBody": {
@@ -404,6 +376,7 @@
                   },
                   "photo": {
                     "type": "string",
+                    "format": "binary",
                     "example": "https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg"
                   }
                 }
@@ -493,6 +466,11 @@
         "summary": "Create a new user",
         "operationId": "registerUser",
         "description": "Create a new user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -558,6 +536,11 @@
         "summary": "Login user",
         "operationId": "loginUser",
         "description": "Login user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -597,16 +580,9 @@
         "summary": "Log out user",
         "operationId": "logoutUser",
         "description": "Logout user",
-        "parameters": [
+        "security": [
           {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The token issued to the current user.",
-              "example": "Authorization - the token issued to the current user"
-            }
+            "bearerAuth": []
           }
         ],
         "responses": {

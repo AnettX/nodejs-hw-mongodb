@@ -5,16 +5,8 @@ operationId: createContact
 description: 'Create a contact with payload'
 security:
   - bearerAuth: []
-# parameters:
-#   - in: header
-#     name: Authorization
-#     required: true
-#     schema:
-#       type: string
-#       description: 'The token issued to the current user.'
-#       example: 'Authorization - the token issued to the current user'
 requestBody:
-  # required: true
+  required: true
   content:
     multipart/form-data:
       schema:
@@ -41,6 +33,7 @@ requestBody:
             example: false
           photo:
             type: string
+            format: binary
             example: https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg
 responses:
   '201':
