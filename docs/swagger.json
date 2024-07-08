@@ -43,12 +43,22 @@
         ],
         "parameters": [
           {
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The token issued to the current user.",
+              "example": "Authorization - the token issued to the current user"
+            }
+          },
+          {
             "in": "query",
             "name": "page",
             "schema": {
-              "type": "integer"
-            },
-            "example": 1
+              "type": "integer",
+              "example": 1
+            }
           },
           {
             "in": "query",
@@ -170,7 +180,20 @@
             "bearerAuth": []
           }
         ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The token issued to the current user.",
+              "example": "Authorization - the token issued to the current user"
+            }
+          }
+        ],
         "requestBody": {
+          "required": true,
           "content": {
             "multipart/form-data": {
               "schema": {
@@ -178,23 +201,16 @@
                 "required": [
                   "name",
                   "phoneNumber",
-                  "contactType",
-                  "userId"
+                  "contactType"
                 ],
                 "properties": {
                   "name": {
-                    "description": "Contact's name",
-                    "type": "string",
                     "example": "Ivanna"
                   },
                   "phoneNumber": {
-                    "description": "Contact's phone number",
-                    "type": "string",
                     "example": "333-33-35"
                   },
                   "contactType": {
-                    "description": "Contact's type",
-                    "type": "string",
                     "enum": [
                       "work",
                       "home",
@@ -202,23 +218,12 @@
                     ]
                   },
                   "email": {
-                    "description": "Contact's email",
-                    "type": "string",
                     "example": "ivanna@maybe.com"
                   },
                   "isFavourite": {
-                    "description": "Whether is contact a favourite",
-                    "type": "boolean",
                     "example": false
                   },
-                  "userId": {
-                    "description": "Contact's user id",
-                    "type": "string",
-                    "example": "6679b28f583b7619e68fecb1"
-                  },
                   "photo": {
-                    "description": "Link to contact's photo",
-                    "type": "string",
                     "example": "<https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg>"
                   }
                 }
@@ -290,6 +295,16 @@
               "type": "string",
               "example": "667dae3a687a20f9da4c3e5a"
             }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The token issued to the current user.",
+              "example": "Authorization - the token issued to the current user"
+            }
           }
         ],
         "responses": {
@@ -351,8 +366,52 @@
               "type": "string",
               "example": "667dae3a687a20f9da4c3e5a"
             }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The token issued to the current user.",
+              "example": "Authorization - the token issued to the current user"
+            }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "Ivanna"
+                  },
+                  "phoneNumber": {
+                    "example": "333-33-35"
+                  },
+                  "contactType": {
+                    "enum": [
+                      "work",
+                      "home",
+                      "personal"
+                    ]
+                  },
+                  "email": {
+                    "example": "ivanna@maybe.com"
+                  },
+                  "isFavourite": {
+                    "example": false
+                  },
+                  "photo": {
+                    "example": "<https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg>"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Update contact",
@@ -411,6 +470,16 @@
             "schema": {
               "type": "string",
               "example": "667dae3a687a20f9da4c3e5a"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The token issued to the current user.",
+              "example": "Authorization - the token issued to the current user"
             }
           }
         ],
@@ -572,6 +641,7 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "The token issued to the current user.",
               "example": "Authorization - the token issued to the current user"
             }
           }

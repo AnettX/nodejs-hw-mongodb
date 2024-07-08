@@ -12,6 +12,32 @@ parameters:
     schema:
       type: string
       example: '667dae3a687a20f9da4c3e5a'
+  - in: header
+    name: Authorization
+    required: true
+    schema:
+      type: string
+      description: 'The token issued to the current user.'
+      example: 'Authorization - the token issued to the current user'
+requestBody:
+  required: true
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          name:
+            example: 'Ivanna'
+          phoneNumber:
+            example: '333-33-35'
+          contactType:
+            enum: ['work', 'home', 'personal']
+          email:
+            example: 'ivanna@maybe.com'
+          isFavourite:
+            example: false
+          photo:
+            example: <https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg>
 responses:
   '200':
     description: 'Update contact'
