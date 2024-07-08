@@ -37,7 +37,7 @@ requestBody:
           isFavourite:
             example: false
           photo:
-            example: <https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg>
+            example: https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg
 responses:
   '200':
     description: 'Update contact'

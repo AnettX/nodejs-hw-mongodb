@@ -30,7 +30,6 @@ properties:
     description: 'Whether is contact a favourite'
     type: boolean
     example: false
-
   userId:
     description: "Contact's user id"
     type: string
@@ -38,4 +37,4 @@ properties:
   photo:
     description: "Link to contact's photo"
     type: string
-    example: <https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg>
+    example: https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg

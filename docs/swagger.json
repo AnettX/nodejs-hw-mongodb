@@ -224,7 +224,7 @@
                     "example": false
                   },
                   "photo": {
-                    "example": "<https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg>"
+                    "example": "https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg"
                   }
                 }
               }
@@ -235,7 +235,7 @@
           "201": {
             "description": "Create a new contact",
             "content": {
-              "application/json": {
+              "multipart/form-data": {
                 "schema": {
                   "type": "object",
                   "required": [
@@ -405,7 +405,7 @@
                     "example": false
                   },
                   "photo": {
-                    "example": "<https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg>"
+                    "example": "https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg"
                   }
                 }
               }
@@ -664,8 +664,7 @@
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
+        "scheme": "bearer"
       }
     },
     "schemas": {
@@ -720,7 +719,7 @@
           "photo": {
             "description": "Link to contact's photo",
             "type": "string",
-            "example": "<https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg>"
+            "example": "https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg"
           }
         }
       },
