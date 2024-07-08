@@ -379,12 +379,15 @@
                 "type": "object",
                 "properties": {
                   "name": {
+                    "type": "string",
                     "example": "Ivanna"
                   },
                   "phoneNumber": {
+                    "type": "string",
                     "example": "333-33-35"
                   },
                   "contactType": {
+                    "type": "string",
                     "enum": [
                       "work",
                       "home",
@@ -392,12 +395,15 @@
                     ]
                   },
                   "email": {
+                    "type": "string",
                     "example": "ivanna@maybe.com"
                   },
                   "isFavourite": {
+                    "type": "boolean",
                     "example": false
                   },
                   "photo": {
+                    "type": "string",
                     "example": "https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg"
                   }
                 }
