@@ -180,20 +180,7 @@
             "bearerAuth": []
           }
         ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The token issued to the current user.",
-              "example": "Authorization - the token issued to the current user"
-            }
-          }
-        ],
         "requestBody": {
-          "required": true,
           "content": {
             "multipart/form-data": {
               "schema": {
@@ -205,12 +192,15 @@
                 ],
                 "properties": {
                   "name": {
+                    "type": "string",
                     "example": "Ivanna"
                   },
                   "phoneNumber": {
+                    "type": "string",
                     "example": "333-33-35"
                   },
                   "contactType": {
+                    "type": "string",
                     "enum": [
                       "work",
                       "home",
@@ -218,12 +208,15 @@
                     ]
                   },
                   "email": {
+                    "type": "string",
                     "example": "ivanna@maybe.com"
                   },
                   "isFavourite": {
+                    "type": "boolean",
                     "example": false
                   },
                   "photo": {
+                    "type": "string",
                     "example": "https://res.cloudinary.com/dxhrq32cf/image/upload/v1719764395/juwfjhytk5jbrjsytild.jpg"
                   }
                 }
@@ -235,7 +228,7 @@
           "201": {
             "description": "Create a new contact",
             "content": {
-              "multipart/form-data": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "required": [
@@ -455,7 +448,7 @@
           "Contacts"
         ],
         "summary": "Delete contact",
-        "operationId": "patchContact",
+        "operationId": "deleteContact",
         "description": "Delete contact",
         "security": [
           {
@@ -471,47 +464,11 @@
               "type": "string",
               "example": "667dae3a687a20f9da4c3e5a"
             }
-          },
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The token issued to the current user.",
-              "example": "Authorization - the token issued to the current user"
-            }
           }
         ],
         "responses": {
           "204": {
-            "description": "Delete contact",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 204
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Successfully deleted contact with id 667dae3a687a20f9da4c3e5a!"
-                    },
-                    "data": {
-                      "type": "object",
-                      "$ref": "#/components/schemas/contact"
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Successfully deleted contact"
           },
           "401": {
             "$ref": "#/components/responses/401"
