@@ -11,9 +11,6 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
-    },
-    {
       "url": "https://contacts-app-6gf0.onrender.com"
     }
   ],
@@ -178,8 +175,7 @@
                 "type": "object",
                 "required": [
                   "name",
-                  "phoneNumber",
-                  "contactType"
+                  "phoneNumber"
                 ],
                 "properties": {
                   "name": {
